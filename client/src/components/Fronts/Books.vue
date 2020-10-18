@@ -18,14 +18,14 @@
               <h4>{{ book.title }}</h4>
               <div v-html="book.content.slice(0,60) + '...'"></div>
               <p>
-                <strong>ราคา:</strong>
+                <strong>ราคาค่าปรับเมื่ออุปกรณ์เสียหาย:</strong>
                 {{ book.prices | getNumberWithCommas
                 }}
               </p>
               
               <div>
                 <button v-on:click.prevent="addCart(book)" class="btn btnsm btn-danger">
-                  <i class="fas fa-shopping-cart"></i> เพิ่มลงตระกร้า
+                  <i class="far fa-clipboard"></i> เลือก
                 </button>
                 <button class="btn btn-sm btn-info" v-on:click="navigateTo('/front-view-book/'+ book.id)">
                   <i class="fab fareadme"></i> อ่านเพิ่ม
@@ -65,7 +65,7 @@
               <a v-on:click.prevent="setCategory(cate)" href="#">{{ cate }}</a>
             </li>
             <li class="clear">
-              <a v-on:click.prevent="setCategory(' ')" href="#">Clear</a>
+              <a v-on:click.prevent="setCategory(' ')" href="#">ล้าง</a>
             </li>
           </ul>
           <div class="clearfix"></div>
@@ -73,7 +73,7 @@
         <transition-group name="fade">
           <div v-for="book in books" v-bind:key="book.id" class="book-list">
              <div class="popup-cart" v-if="carts.length">
-            <h3>ตระกร้าอุปกรณ์</h3>
+            <h3>อุปกรณ์ที่ใช้งาน</h3>
             <ul class="cart">
               <li v-for="cart in carts" v-bind:key="cart.id">
                 <div>{{ cart.booktitle }} จํานวน {{ cart.qty}} x {{ cart.prices }}</div>
@@ -84,7 +84,7 @@
               </li>
             </ul>
             <hr />
-            <p>รวมทั้งสิน: {{total | getNumberWithCommas}} บาท</p>
+            <p>รวมราคาค่าปรับเมื่ออุปกรณ์เสียหาย: {{total | getNumberWithCommas}} บาท</p>
             <button class="btn btn-xs btn-danger" v-on:click.prevent="sendBuy">
               <i class="fas fa-check-square"></i> ยืนยันการเลือกใช้งาน
             </button>
@@ -101,23 +101,23 @@
             <div v-html="book.content.slice(0,200) + '...'"></div>
             <div class="book-info">
               <p>
-                <strong>Category:</strong>
+                <strong>ประเภท:</strong>
                 {{ book.category }}
               </p>
               <p>
-                <strong>Create:</strong>
+                <strong>นำเข้าเมื่อ:</strong>
                 {{ book.createdAt }}
               </p>
               <!-- <p>status: {{ book.status }}</p> -->
               <p>
-                <strong>ราคา:</strong>
+                <strong>ราคาค่าปรับเมื่ออุปกรณ์เสียหาย:</strong>
                 {{ book.prices | getNumberWithCommas
                 }}
                 
               </p>
               <p>
                 <button v-on:click.prevent="addCart(book)" class="btn btnsm btn-danger">
-                  <i class="fas fa-shopping-cart"></i> เพิ่มลงตระกร้า
+                  <i class="far fa-clipboard"></i> เลือก
                 </button>
                 <button
                   class="btn btn-sm btn-info"
@@ -288,8 +288,8 @@ export default {
             userid: this.user.id,
             email: this.user.email ,
             qty: 1,
-            clientStatus: "รอชำระ",
-            shopStatus: "รอส่ง",
+            clientStatus: "กำลังใช้งาน",
+            shopStatus: "รอการตรวจสอบ",
             booktitle: book.title,
             username: this.user.name,
             userlastname: this.user.lastname,
@@ -354,7 +354,7 @@ export default {
   margin-left: auto;
   margin-right: auto;
   border-radius: 5px;
-  background: lightslategray;
+  background: rgb(11, 138, 212);
   height: 250px;
   color: white;
   padding: 20px;
@@ -368,7 +368,7 @@ export default {
 .hero {
   margin-top: 80px;
   border-radius: 5px;
-  background: seagreen;
+  background-image: url('https://www.zw3dthailand.com/wp-content/uploads/2017/02/background-bg.jpg');
   height: 250px;
   color: white;
   padding: 20px;
@@ -390,14 +390,15 @@ export default {
 /* thumbnail */
 .thumbnail-pic img {
   width: 200px;
+  border-radius: 8px;
   padding: 5px 5px 5px 5px;
-  border: solid 1px #ccc;
   margin: 10px 10px 0px 0px;
 }
 .book-info {
   float: left;
 }
 .book-pic {
+  border-radius: 8px;
   float: left;
 }
 .clearfix {
@@ -405,11 +406,13 @@ export default {
 }
 .book-list {
   border: solid 1px #dfdfdf;
+  border-radius: 15px;
   margin-bottom: 10px;
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
   padding: 5px;
+  background: skyblue;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
 .book-header {
@@ -424,7 +427,7 @@ export default {
 .book-load-finished {
   padding: 4px;
   text-align: center;
-  background: seagreen;
+  background: rgb(11, 138, 212);
   color: white;
 }
 .categories {
@@ -439,12 +442,14 @@ export default {
 }
 .categories li a {
   padding: 5px 10px 5px 10px;
+  border-radius: 8px;
   background: paleturquoise;
   color: black;
   text-decoration: none;
 }
 .categories li.clear a {
-  background: tomato;
+  border-radius: 8px;
+  background: black;
   color: white;
 }
 .create-book {

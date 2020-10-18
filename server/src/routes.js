@@ -26,7 +26,7 @@ module.exports = (app) => {
     /* RESFUL Api for users management */
     // create user
     app.post('/user',
-        isAuthenController,
+        //isAuthenController,
         UserController.create
     )
 

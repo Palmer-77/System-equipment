@@ -14,7 +14,7 @@
           <div>
             <form class="form-inline form-search">
               <span>
-                <strong>จํานวน blog:</strong>
+                <strong>จํานวน โพสต์:</strong>
                 {{results.length}}
               </span>
               &nbsp;
@@ -39,7 +39,7 @@
               <a v-on:click.prevent="setCategory(cate)" href="#">{{ cate }}</a>
             </li>
             <li class="clear">
-              <a v-on:click.prevent="setCategory(' ')" href="#">Clear</a>
+              <a v-on:click.prevent="setCategory(' ')" href="#">ล้าง</a>
             </li>
           </ul>
           <div class="clearfix"></div>
@@ -55,14 +55,14 @@
               <!-- </transition> -->
             </div>
             <h3>{{ blog.title }}</h3>
-            <div v-html="blog.content.slice(0,200) + '...'"></div>
+            <div v-html="blog.content.slice(0,200)"></div>
             <div class="blog-info">
               <p>
-                <strong>Category:</strong>
+                <strong>ประเภท:</strong>
                 {{ blog.category }}
               </p>
               <p>
-                <strong>Create:</strong>
+                <strong>ลงเมื่อ:</strong>
                 {{ blog.createdAt }}
               </p>
               <!-- <p>status: {{ blog.status }}</p> -->
@@ -220,7 +220,7 @@ export default {
   margin-left: auto;
   margin-right: auto;
   border-radius: 5px;
-  background: seagreen;
+  background-image: url('https://www.zw3dthailand.com/wp-content/uploads/2017/02/background-bg.jpg');
   height: 250px;
   color: white;
   padding: 20px;
@@ -241,6 +241,7 @@ export default {
 /* thumbnail */
 .thumbnail-pic img {
   width: 200px;
+  border-radius: 8px;
   padding: 5px 5px 5px 5px;
   border: solid 1px #ccc;
   margin: 10px 10px 0px 0px;
@@ -256,10 +257,12 @@ export default {
 }
 .blog-list {
   border: solid 1px #dfdfdf;
+  border-radius: 15px;
   margin-bottom: 10px;
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
+  background: skyblue;
   padding: 5px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
@@ -277,7 +280,7 @@ export default {
 .blog-load-finished {
   padding: 4px;
   text-align: center;
-  background: seagreen;
+  background: rgb(11, 138, 212);
   color: white;
 }
 .categories {
@@ -292,12 +295,14 @@ export default {
 }
 .categories li a {
   padding: 5px 10px 5px 10px;
+  border-radius: 8px;
   background: paleturquoise;
   color: black;
   text-decoration: none;
 }
 .categories li.clear a {
-  background: tomato;
+  border-radius: 8px;
+  background: black;
   color: white;
 }
 .create-blog {

@@ -28,7 +28,7 @@
             </li>
 
             <li v-if="!isUserLoggedIn" role="presentation">
-              <a href="#" v-on:click.prevent="showLogin = true ;showRegister=false">Login</a>
+              <a href="#" v-on:click.prevent="showLogin = true ;showRegister=false">เข้าสู่ระบบ</a>
             </li>
             <transition name="fade">
               <li v-if="isUserLoggedIn" role="presentation">
@@ -38,13 +38,67 @@
             <li v-if="isUserLoggedIn" role="presentation">
               <a href="#" v-on:click.prevent="logout">ออกจากระบบ</a>
             </li>
+            <li v-if="!isUserLoggedIn" role="presentation">
+              <a href="#" v-on:click.prevent="showRegister = true ;showLogin = false">สมัครสมาชิก</a>
+            </li>
           </ul>
         </div>
       </div>
     </div>
     <div class="modal" v-if="showRegister">
       <transition name="fade">
-       
+       <div class="login-wrapperr">
+          <h3>Client Register</h3>
+          <form v-on:submit.prevent="clientRegister" class="form-horizontal">
+            <div class="form-group">
+              <label class="control-label col-md-3">Email:</label>
+              <div class="col-md-9">
+                <input required placeholder="email" type="email" v-model="client.email" class="form-control" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-3">Password:</label>
+              <div class="col-md-9">
+                <input required type="password" placeholder="password" v-model="client.password" class="form-control" />
+              </div>
+              <br>
+            </div>
+
+
+            <div class="form-group">
+              <label class="control-label col-md-3">Name:</label>
+              <div class="col-md-9">
+                <input required  type="text" placeholder="name" v-model="client.name" class="form-control" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-3">Lastname:</label>
+              <div class="col-md-9">
+                <input required type="text" placeholder="lastname" v-model="client.lastname" class="form-control" />
+              </div>
+              <br>
+              <br>
+              <br>
+              <br>
+
+            </div>
+            <div class="form-group">
+              <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-success btn-sm" type="submit">
+                  <i class="fas fa-key"></i> Register
+                </button>
+                <button v-on:click.prevent="showRegister = false" class="btn btn-danger btn-sm" type="button">
+                  <i class="fas fa-timescircle"></i> Close
+                </button>
+              </div>
+            </div>
+            <div class="error">
+              <p v-if="error">{{error}}</p>
+            </div>
+          </form>
+        </div>
       </transition>
     </div>
     <transition name="fade">
@@ -108,7 +162,7 @@
 <script>
 import { mapState } from "vuex";
 import AuthenService from "@/services/AuthenService";
-import UsersService from '@/services/UsersService'
+import UsersService from "@/services/UsersService";
 export default {
   data() {
     return {
@@ -119,11 +173,11 @@ export default {
       resultUpdated: "",
       showRegister: false,
       client: {
-        name: "",
-        lastname: "",
         email: "",
         password: "",
-        status: "active",
+        name: "",
+        lastname: "",
+        status: "pause",
         type: "user",
       },
     };
@@ -148,7 +202,7 @@ export default {
       // this.$router.push({
       // name: 'login'
       // })
-      this.resultUpdated = "Logout successful.";
+      this.resultUpdated = "ออกจากระบบเรียบร้อย";
       setTimeout(() => (this.resultUpdated = ""), 3000);
     },
     async clientLogin() {
@@ -166,7 +220,7 @@ export default {
         // })
         // console.log(response.data)
         (this.email = ""), (this.password = ""), (this.showLogin = false);
-        this.resultUpdated = "Login successful.";
+        this.resultUpdated = "เข้าสู่ระบบเรียบร้อย";
         setTimeout(() => (this.resultUpdated = ""), 3000);
       } catch (error) {
         console.log(error);
@@ -182,7 +236,7 @@ export default {
         await UsersService.post(this.client);
         this.client = {};
         this.showRegister = false;
-        this.resultUpdated = "Register successful, Please login first.";
+        this.resultUpdated = "สมัครเรียบร้อยรอเจ้าหน้าที่ยืนยันสิทธิใช้งาน";
         setTimeout(() => (this.resultUpdated = ""), 5000);
       } catch (error) {
         console.log(error);
@@ -219,7 +273,7 @@ export default {
   margin-top: -20px;
 }
 .navbar-inverse {
-  background-color: seagreen;
+  background-color: rgb(11, 138, 212);
 }
 .navbar-inverse .navbar-nav > li > a {
   color: #dbdbf6;

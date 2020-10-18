@@ -87,7 +87,7 @@ export default {
 .hero {
   margin-top: 80px;
   border-radius: 5px;
-  background: seagreen;
+  background-image: url('https://www.zw3dthailand.com/wp-content/uploads/2017/02/background-bg.jpg');
   height: 250px;
   color: white;
   padding: 20px;
@@ -100,6 +100,7 @@ export default {
   max-width: 200px;
 }
 .book-wrapper {
+  background: skyblue;
   margin-top: 20px;
   padding: 40px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);

@@ -5,13 +5,13 @@
             <div class="hero-wrapper">
                 <div class="hero">
                     <img src="@/assets/scientist.png"  height="100%" class="logo" style="float:left">
-                    <h1>โพสเกี่ยวกับเครื่องชั่งสาร</h1>
+                    <h1>ข่าวสารเกี่ยวกับการเข้าใช้งานออุปกรณ์</h1>
                     <p>By Steve Black</p>
                 </div>
             </div>
             <div class="blog-wrapper" v-if="blog != null">
                 <h1>{{ blog.title }}</h1>
-                <p><strong>Category: </strong>: <a href="#" v-on:click.prevent="navigateTo(`/front?search=${blog.category}`)">{{blog.category }}</a></p>
+                <p><strong>ประเภท: </strong>: <a href="#" v-on:click.prevent="navigateTo(`/front?search=${blog.category}`)">{{blog.category }}</a></p>
                 <div class="content" v-html="blog.content"></div>
                 <!-- <p>category: {{ blog.category }}</p>
                 <p>status: {{ blog.status }}</p> -->
@@ -71,7 +71,7 @@
     .hero {
         margin-top: 80px;
         border-radius: 5px;
-        background: darkcyan;
+        background-image: url('https://www.zw3dthailand.com/wp-content/uploads/2017/02/background-bg.jpg');
         height:250px;
         color:white;
         padding: 20px;
@@ -82,6 +82,7 @@
     .blog-wrapper {
         margin-top:20px;
         padding: 40px;
+        background: skyblue;
         box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
     }
     .back-nav {

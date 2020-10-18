@@ -33,13 +33,13 @@
       <div class="rows">
         <div class="col-md-12">
           <div class="transection-wrapper">
-            <h4>รายละเอียดการการใช้งาน</h4>
+            <h2>ประวัติและรายละเอียดการการใช้งาน</h2>
             <ul class="trasection-list">
               <li v-for="transection in transections" v-bind:key="transection.id">
                 <h4>{{ transection.booktitle }} </h4>
                 <p>
-                  <strong>จำนวนครั้งที่ใช้ :</strong>
-                  {{ transection.qty * transection.prices | getNumberWithCommas }} ครั้ง
+                  <strong>จำนวนอุปกรณ์ที่ใช้งาน :</strong>
+                  {{ transection.qty | getNumberWithCommas }} เครื่อง
                 </p>
                 <p>
                   <strong>สถานะการใช้งาน :</strong>
@@ -132,8 +132,10 @@ export default {
 }
 .trasection-list li {
   border: solid 1px #dfdfdf;
+  border-radius:15px ;
   margin-bottom: 10px;
   padding: 20px;
+  background: skyblue;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
 .cart-info {
