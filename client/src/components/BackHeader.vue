@@ -4,7 +4,7 @@
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand navbar-link" href="#" v-on:click.prevent="navigateTo('/dashboard')">
-                <img src="../assets/scientist.png" id="logo">
+                <img src="../assets/scientist3.png" id="logo">
             </a>
             <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1">
                 <span class="sr-only">Toggle navigation</span>
@@ -14,14 +14,14 @@
         </div>
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="nav navbar-nav navbar-right">
-                <li><router-link :to="{name: 'blogs'}" >โพส</router-link></li>
-                <li role="presentation"><router-link :to="{name: 'books'}">อุปกรณ์</router-link></li>
+                <li><router-link :to="{name: 'blogs'}" >โพสต์</router-link></li>
+                <li role="presentation"><router-link :to="{name: 'equipments'}">อุปกรณ์</router-link></li>
                 <li><router-link :to="{name: 'users'}" >ผู้ใช้</router-link></li>
                 <li><router-link :to="{name: 'comments'}" >คอมเม้น</router-link></li>
                 <li><router-link :to="{name: 'Cartlist'}" >ประวัติการใช้งาน</router-link></li>
                 <li v-if="!isUserLoggedIn"><router-link :to="{name: 'login'}" >เข้าสู่ระบบ</router-link></li>
                 <transition name="fade">
-                    <li v-if="isUserLoggedIn" role="presentation"><a href="#">{{user.name}}</a></li>
+                    <li v-if="isUserLoggedIn" role="presentation"><a href="#">ADMIN : {{user.name}}</a></li>
                 </transition>
                 <li v-if="isUserLoggedIn" role="presentation"><a href="#" v-on:click.prevent="logout">ออกจากระบบ</a></li>
             </ul>
@@ -98,7 +98,7 @@ export default {
     }
 
     .navbar-brand > img {
-        width: 36px;
+        width: 200px;
         padding: 12px 0;
         margin-top: -20px;
     }
@@ -109,4 +109,7 @@ export default {
         background-color: #222;
         border-color: #080808;
     }
+    div {
+    font-family: 'Kanit', sans-serif;
+}
  </style>

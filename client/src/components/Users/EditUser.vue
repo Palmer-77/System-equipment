@@ -2,7 +2,7 @@
     <div>
         <main-header navsel="back"></main-header>
         <br><br><br>
-        <center><h1>Edit User</h1>
+        <center><h1>แก้ไขข้อมูลผู้ใช้</h1>
         <form v-on:submit.prevent = "editUser">
             <table border="0">
             <tr>
@@ -43,7 +43,7 @@
             <br>
             <tr>
                 <th class="d">
-                    <center><b>status:</b></center>
+                    <center><b>สถานะ:</b></center>
                 </th>
                 <th class ="c">
                     <input class="form-control center_div" type="text" v-model="user.status">
@@ -52,7 +52,7 @@
             <br>
             <tr>
                 <th class="d">
-                    <center><b>type:</b></center>
+                    <center><b>แบบ:</b></center>
                 </th>
                 <th class ="c">
                     <input class="form-control center_div" type="text" v-model="user.type">
@@ -61,8 +61,8 @@
             </table>
             <br>
                 <p>
-                    <button class="btn btn-success btn-sm" type="submit">edit user</button>
-                    <button class="btn btn-sm secondary" v-on:click="navigateTo('/users')">Back..</button>
+                    <button class="btn btn-success btn-sm" type="submit">อัพเดท</button>
+                    <button class="btn btn-sm secondary" v-on:click="navigateTo('/users')">กลับ</button>
                 </p>
             
         </form>
@@ -122,4 +122,7 @@
     .d{
         width: 100px ;
     }
+    div {
+    font-family: 'Kanit', sans-serif;
+}
 </style>

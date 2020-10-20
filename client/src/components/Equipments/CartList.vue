@@ -9,29 +9,29 @@
             <div class="col-md-12">
               <div class="transection-wrapper">
                 <h4>
-                  รายละเอียดการสั่งซื้อ
+                  ประวัติและรายละเอียดการการใช้งาน
                 </h4>
                 <ul class="trasection-list">
                   <li v-for="transection in transections" v-bind:key="transection.id">
                     <h4>
-                      {{ transection.booktitle }} จํานวน {{ transection.qty}} x {{ transection.prices }}
+                      {{ transection.booktitle }} จํานวน {{ transection.qty}} เครื่อง
                     </h4>
                     <h4>email: {{ transection.email }}</h4>
                     <h4>
                       ชื่อ: {{ transection.username }} {{ transection.userlastname }}
                     </h4>
                     <p>
-                      <strong>ราคารวม :</strong>
+                      <strong>ราคาค่าปรับเมื่ออุปกรณ์เสียหาย:</strong>
                       {{ transection.qty * transection.prices | getNumberWithCommas }} บาท
                     </p>
                     <p>
-                      <strong>สถานะลูกค้า :</strong> {{transection.clientStatus }}
+                      <strong>สถานะการใช้งาน :</strong> {{transection.clientStatus }}
                     </p>
                     <p>
-                      <strong>สถานะร้านค้า :</strong> {{ transection.shopStatus }}
+                      <strong>สถานะการตรวจสอบ :</strong> {{ transection.shopStatus }}
                     </p>
                     <p>
-                      <button v-on:click.prevent="sendSent(transection.id)" class="btn btnxs btn-success">ยืนยันการส่ง</button>
+                      <button v-on:click.prevent="sendSent(transection.id)" class="btn btnxs btn-success">ยืนยันการตวรจสอบ</button>
                     </p>
                     <p>
                       <strong>วันที่ :</strong>
@@ -79,7 +79,7 @@ export default {
     async sendSent(id) {
       let transection = {
         id: id,
-        shopStatus: "ส่งแล้ว",
+        shopStatus: "ตรวจสอบเรียบร้อย",
       };
       try {
         await BuysService.put(transection);
@@ -97,7 +97,7 @@ export default {
   margin-top: 80px;
 }
 .trasection-null {
-  border: solid 1px #dfdfdf;
+  border-radius: 8px;
   margin-bottom: 10px;
   padding: 20px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
@@ -113,13 +113,17 @@ export default {
 }
 .trasection-list li {
   border: solid 1px #dfdfdf;
+  border-radius:15px ;
   margin-bottom: 10px;
   padding: 20px;
+  background: skyblue;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
 .cart-info {
   margin-top: 50px;
   font-family: kanit;
 }
-
+div {
+    font-family: 'Kanit', sans-serif;
+}
 </style>

@@ -2,7 +2,7 @@
     <div>
         <main-header navsel="back"></main-header>
         <br><br><br>
-        <center><h1>Create User</h1>
+        <center><h1>เพิ่มผู้ใช้</h1>
         <form v-on:submit.prevent = "createUser">
             <table border="0">
             <tr>
@@ -43,7 +43,7 @@
             <br>
             <tr>
                 <th class="d">
-                    <center><b>type:</b></center>
+                    <center><b>แบบ:</b></center>
                 </th>
                 <th class ="c">
                     <select class="form-control" v-model="user.type">
@@ -55,8 +55,8 @@
             </table>
             <br>
                 <p>
-                    <button class="btn btn-success btn-sm" type="submit">Create user</button>
-                    <button class="btn btn-sm secondary" v-on:click="navigateTo('/users')">Back..</button>
+                    <button class="btn btn-success btn-sm" type="submit">เพิ่มผู้ใช้</button>
+                    <button class="btn btn-sm secondary" v-on:click="navigateTo('/users')">กลับ</button>
                 </p>
             
         </form>
@@ -113,4 +113,7 @@ export default {
     .d{
         width: 100px ;
     }
+    div {
+    font-family: 'Kanit', sans-serif;
+}
 </style>

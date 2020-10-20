@@ -3,7 +3,7 @@
         <main-header navsel="back"></main-header>
         <div class="blog-header">
             <br><br><br>
-            <h2>ส่วนจัดการ Comments</h2>
+            <h2>ส่วนจัดการ คอมเมนต์</h2>
             
             <div>
                 <form class="form-inline form-search">
@@ -16,16 +16,16 @@
                 </form>
             </div>
             <div class="create-blog">
-                <h4>จํานวน comment {{comments.length}}</h4>
+                <h4>จํานวน คอมเมนต์ {{comments.length}}</h4>
             </div>
         </div>
         <div v-for="comment in comments" v-bind:key="comment.id" class="blog-list">
-            <strong>comment:</strong>
+            <strong>คอมเมนต์:</strong>
             <p>id: {{ comment.id }}</p>
-            <p>blog id: {{ comment.blogId }}</p>
-            <p>comment: {{ comment.comment }}</p>
+            <p>โพสต์ id: {{ comment.blogId }}</p>
+            <p>คอมเมนต์: {{ comment.comment }}</p>
             <p>
-                <button class="btn btn-sm btn-info" v-on:click="navigateTo('/blog/'+ comment.blogId)">ดูบล็อกที่ Comment</button> 
+                <button class="btn btn-sm btn-info" v-on:click="navigateTo('/blog/'+ comment.blogId)">ดูโพสต์ที่ คอมเมนต์</button> 
                 <button class="btn btn-sm btn-danger" v-on:click="deleteComment(comment)">ลบข้อมูล</button>
             </p>
         </div>
@@ -116,11 +116,13 @@ export default {
     }
     .blog-list {
         border:solid 1px #dfdfdf;
+        border-radius: 8px;
         margin-bottom: 10px;
         max-width: 900px;
         margin-left: auto;
         margin-right: auto;
         padding: 5px;
+        background: skyblue;
         box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
     }
     .blog-header {
@@ -165,7 +167,10 @@ export default {
     .blog-load-finished {
   padding: 4px;
   text-align: center;
-  background: seagreen;
+  background: darkslategrey;
   color: white;
+}
+div {
+    font-family: 'Kanit', sans-serif;
 }
 </style>

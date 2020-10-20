@@ -2,11 +2,11 @@
     <div id="comment">
         <div class="comments-wrapper">
             <div class="comment-form-wrapper">
-                <h4>Comments</h4>
+                <h4>คอมเมนต์</h4>
                 <form v-on:submit.prevent="sendComment">
                     <p><textarea rows="5" class="form-control" v-model="comment"></textarea></p>
-                    <p v-if="user == null">Login / Register for commented.</p>
-                    <p v-else ><button type="submit" class="btn btn-primary"><i class="fas fa-comment"></i> Send Comment</button></p>
+                    <p v-if="user == null">เข้าสู่ระบบ / สมัครสมาชิกเพื่อแสดงความคิดเห็น</p>
+                    <p v-else ><button type="submit" class="btn btn-primary"><i class="fas fa-comment"></i> ส่งคอมเมนต์</button></p>
                 </form>
             </div>
             <transition-group tag="ul" name="fade" class="comment-list">
@@ -169,5 +169,8 @@ ul.pictures li img {
  font-size: 1.2em;
  text-align: center;
  padding: 50px 0;
+}
+div {
+    font-family: 'Kanit', sans-serif;
 }
 </style>

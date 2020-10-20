@@ -1,11 +1,11 @@
 <template>
   <div class="container blog-wrapper">
     <main-header navsel="back"></main-header>
-    <h1>Edit Blog</h1>
+    <h1>แก้ไขโพสต์</h1>
     <form v-on:submit.prevent = "editBlog" >
       <!-- <p>title: <input type="text" v-model="blog.title"></p> -->
       <p>
-        <label for="" class="control-label">Title: </label>
+        <label for="" class="control-label">หัวข้อ: </label>
         <input type="text" v-model="blog.title" class="form-control">        
       </p>
       <transition name="fade">
@@ -19,13 +19,13 @@
             accept="image/*" class="input-file">
             <!-- <p v-if="isInitial || isSuccess"> -->
             <p v-if="isInitial">
-              Drag your file(s) here to begin<br> or click to browse
+              ลากไฟล์ของคุณมาที่นี่เพื่อเริ่มต้น<br> หรือคลิกเพื่อเรียกดู
             </p>
             <p v-if="isSaving">
-              Uploading {{ fileCount }} files...
+              กำลังอัปโหลด {{ fileCount }} ไฟล์...
             </p>   
             <p v-if="isSuccess">
-              Upload Successful.
+              อัปโหลดสำเร็จ
             </p>        
         </div>
       </form>
@@ -34,21 +34,21 @@
         <li v-for="picture in pictures" v-bind:key="picture.id">              
           <img class="img-thumbnail" style="margin-bottom:5px;" :src="BASE_URL+picture.name" alt="picture image">              
           <br />  
-          <button class="btn btn-xs btn-info" v-on:click.prevent="useThumbnail(picture.name)">Thumbnail</button>
-          <button class="btn btn-xs btn-danger" v-on:click.prevent="delFile(picture)">Delete</button>
+          <button class="btn btn-xs btn-info" v-on:click.prevent="useThumbnail(picture.name)">ภาพขนาดย่อ</button>
+          <button class="btn btn-xs btn-danger" v-on:click.prevent="delFile(picture)">ลบ</button>
         </li>        
       </transition-group>
       <div class="clearfix"></div>
       </div>  
-      <p><strong>content: </strong></p>
+      <p><strong>เนื้อหา: </strong></p>
       <p><vue-ckeditor v-model.lazy="blog.content" :config="config" @blur="onBlur($event)" @focus="onFocus($event)" /></p>            
       <p>
-        <label class="control-label">Category :</label>
+        <label class="control-label">ประเภท :</label>
         <input type="text" v-model="blog.category" class="form-control">
       </p>            
       <p>
-        <button class="btn btn-warning" type="submit">Update Blog</button>
-        <button class="btn btn-default" type="button" v-on:click="navigateTo('/blogs')">Back</button>
+        <button class="btn btn-warning" type="submit">อัพเดท</button>
+        <button class="btn btn-default" type="button" v-on:click="navigateTo('/blogs')">กลับ</button>
       </p>      
       
     </form>   
@@ -422,5 +422,8 @@ ul.pictures li img {
   font-size: 1.2em;
   text-align: center;
   padding: 50px 0;
+}
+div {
+    font-family: 'Kanit', sans-serif;
 }
 </style>

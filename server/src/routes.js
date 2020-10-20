@@ -2,7 +2,7 @@ const UserController = require('./controllers/UserController')
 const UserAuthenController = require('./controllers/UserAuthenController')
 const isAuthenController = require('./authen/isAuthenController') //ใช้เช็ค token
 const BlogController = require('./controllers/BlogController')
-const BookController = require('./controllers/BookController')
+const EquipmentController = require('./controllers/EquipmentController')
 const CommentController = require('./controllers/CommentController')
 const BuyController = require('./controllers/BuyController')
 let multer = require("multer")
@@ -163,34 +163,34 @@ module.exports = (app) => {
         BlogController.frontIndex
     )
     
-    // book route
-    // create book
-    app.post('/book',
+    // Equipment route
+    // create Equipment
+    app.post('/equipment',
         isAuthenController,
-        BookController.create
+        EquipmentController.create
     )
-    // edit book, suspend, active
-    app.put('/book/:bookId',
+    // edit Equipment, suspend, active
+    app.put('/equipment/:equipmentId',
         isAuthenController,
-        BookController.put
+        EquipmentController.put
     )
-    // delete book
-    app.delete('/book/:bookId',
+    // delete Equipment
+    app.delete('/equipment/:equipmentId',
         isAuthenController,
-        BookController.remove
+        EquipmentController.remove
     )
-    // get book by id
-    app.get('/book/:bookId',
+    // get Equipment by id
+    app.get('/equipment/:equipmentId',
         isAuthenController,
-        BookController.show
+        EquipmentController.show
     )
-    // get all book
-    app.get('/books',
+    // get all Equipment
+    app.get('/equipments',
         isAuthenController,
-        BookController.index
+        EquipmentController.index
     )
-    app.get('/books/front',
-        BookController.frontIndex
+    app.get('/equipments/front',
+        EquipmentController.frontIndex
     )
 
     // buy route

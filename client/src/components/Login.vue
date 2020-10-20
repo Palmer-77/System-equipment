@@ -5,7 +5,7 @@
         <div class="row">
           <div class="con-md-12">
             <div class="login-wrapper">
-              <h1>Login</h1>
+              <h1>เข้าสู่ระบบ Admin</h1>
               <form v-on:submit.prevent="onLogin" class="form-horizontal">
                 <div class="form-group">
                   <label for="" class="control-label col-md-3">Username: </label>
@@ -21,7 +21,7 @@
                 </div>
                 <div class="form-group">
                   <div class="col-md-offset-3 col-md-8">                    
-                    <button class="btn btn-default" type="submit"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+                    <button class="btn btn-default" type="submit"><i class="fas fa-sign-in-alt"></i> เข้าระบบ</button>
                     <p class="error" v-if="error">{{error}}</p>
                   </div>
                 </div>
@@ -88,8 +88,8 @@ export default {
   margin-right: auto;
   margin-top: 80px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.30);
-  border: 1px solid #f3f3f3;
-  border-radius: 3px;
+  border-radius: 8px;
+  background: grey;
   padding: 20px;
 }
 
@@ -98,6 +98,9 @@ export default {
   padding-bottom: 20px;
   margin-top: 0px;
   font-family: Kanit;
+}
+div {
+    font-family: 'Kanit', sans-serif;
 }
 </style>
 

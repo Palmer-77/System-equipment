@@ -4,7 +4,7 @@
     <div class="blog-header">
       <br />
       <br />
-      <h2>จัดการ โพส</h2>
+      <h2>จัดการ โพสต์</h2>
       <div>
         <form class="form-inline form-search">
           <div class="form-group">
@@ -289,6 +289,7 @@ export default {
 }
 .categories li a {
   padding: 5px 10px 5px 10px;
+  border-radius: 8px;
   background: paleturquoise;
   color: black;
   text-decoration: none;
@@ -297,17 +298,21 @@ export default {
   margin-top: 10px;
 }
 .categories li.clear a {
-  background: tomato;
+  border-radius: 8px;
+  background: black;
   color: white;
 }
 .blog-load-finished {
   padding: 4px;
   text-align: center;
-  background: seagreen;
+  background: darkslategrey;
   color: white;
 }
 .emptyblog {
   background-color: coral;
   border-color: coral;
+}
+div {
+    font-family: 'Kanit', sans-serif;
 }
 </style>

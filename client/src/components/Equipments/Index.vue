@@ -4,7 +4,7 @@
     <div class="book-header">
       <br />
       <br />
-      <h2>ส่วนจัดการ Books</h2>
+      <h2>ส่วนจัดการ อุปกรณ์</h2>
       <div>
         <form class="form-inline form-search">
           <div class="form-group">
@@ -25,8 +25,8 @@
       </div>
 
       <div class="create-book">
-        <button class="btn btn-success btn-sm" v-on:click="navigateTo('/book/create')">Create book</button>
-        <strong>จํานวน book:</strong>
+        <button class="btn btn-success btn-sm" v-on:click="navigateTo('/equipment/create')">เพิ่มอุปกรณ์</button>
+        <strong>จํานวน อุปกรณ์:</strong>
         {{results.length}}
       </div>
 
@@ -35,54 +35,54 @@
           <a v-on:click.prevent="setCategory(cate)" href="#">{{ cate }}</a>
         </li>
         <li class="clear">
-          <a v-on:click.prevent="setCategory(' ')" href="#">Clear</a>
+          <a v-on:click.prevent="setCategory(' ')" href="#">ล้าง</a>
         </li>
       </ul>
       <div class="clearfix"></div>
     </div>
     <transition-group name="fade">
-      <div v-for="book in books" v-bind:key="book.id" class="book-list">
-        <!-- <p>id: {{ book.id }}</p> -->
+      <div v-for="equipment in equipments" v-bind:key="equipment.id" class="book-list">
+        <!-- <p>id: {{ equipment.id }}</p> -->
         <div class="book-pic">
           <!-- <transition name="fade"> -->
-          <div class="thumbnail-pic" v-if="book.thumbnail != 'null'">
-            <img :src="BASE_URL+book.thumbnail" alt="thumbnail" />
+          <div class="thumbnail-pic" v-if="equipment.thumbnail != 'null'">
+            <img :src="BASE_URL+equipment.thumbnail" alt="thumbnail" />
           </div>
           <!-- </transition> -->
         </div>
-        <h3>{{ book.title }}</h3>
-        <div v-html="book.content.slice(0,200) + '...'"></div>
+        <h3>{{ equipment.title }}</h3>
+        <div v-html="equipment.content.slice(0,200) + '...'"></div>
         <div class="book-info">
           <p>
-            <strong>Category:</strong>
-            {{ book.category }}
+            <strong>ประเภท:</strong>
+            {{ equipment.category }}
           </p>
           <p>
-            <strong>Create:</strong>
-            {{ book.createdAt }}
+            <strong>เพิ่มเมื่อ:</strong>
+            {{ equipment.createdAt }}
           </p>
           <p>
-            <strong>status:</strong>
-            {{ book.status }}
+            <strong>สถานะ:</strong>
+            {{ equipment.status }}
           </p>
           <p>
-            <strong>Prices:</strong>
-            {{ book.prices | getNumberWithCommas }} บาท
+            <strong>ราคาเมื่ออุปกรณ์เสียหาย:</strong>
+            {{ equipment.prices | getNumberWithCommas }} บาท
           </p>
-          <!-- <p>status: {{ book.status }}</p> -->
+          <!-- <p>status: {{ equipment.status }}</p> -->
           <p>
-            <button class="btn btn-sm btn-info" v-on:click="navigateTo('/book/'+ book.id)">View Book</button>
+            <button class="btn btn-sm btn-info" v-on:click="navigateTo('/equipment/'+ equipment.id)">ดูรายระเอียดอุปกรณ์</button>
             <button
               class="btn btn-sm btn-warning"
-              v-on:click="navigateTo('/book/edit/'+ book.id)"
-            >Edit book</button>
-            <button class="btn btn-sm btn-danger" v-on:click="deleteBook(book)">Delete</button>
+              v-on:click="navigateTo('/equipment/edit/'+ equipment.id)"
+            >แก้ไขรายระเอียดอุปกรณ์</button>
+            <button class="btn btn-sm btn-danger" v-on:click="deleteEquipment(equipment)">ลบ</button>
           </p>
           <p>
-            <a class="btn btn-danger btn-sm" href="#" v-on:click.prevent="suspend(book.id)">
+            <a class="btn btn-danger btn-sm" href="#" v-on:click.prevent="suspend(equipment.id)">
               <i class="fas fa-pause"></i> Suspend
             </a>&nbsp;
-            <a class="btn btn-success btn-sm" href="#" v-on:click.prevent="publish(book.id)">
+            <a class="btn btn-success btn-sm" href="#" v-on:click.prevent="publish(equipment.id)">
               <i class="fas fa-check"></i> Published
             </a>&nbsp;
           </p>
@@ -92,17 +92,17 @@
     </transition-group>
 
     <div id="book-list-bottom">
-      <div class="empty-book" v-if="books.length === 0 && loading === false">*** ไม่มีข้อมูล***</div>
-      <div class="empty-book" v-if="books.length === 0 && loading === true">*** ไม่มีข้อมูล***</div>
+      <div class="empty-book" v-if="equipments.length === 0 && loading === false">*** ไม่มีข้อมูล***</div>
+      <div class="empty-book" v-if="equipments.length === 0 && loading === true">*** ไม่มีข้อมูล***</div>
       <div
         class="book-load-finished"
-        v-if="books.length === results.length && results.length > 0"
+        v-if="equipments.length === results.length && results.length > 0"
       >โหลดข้อมูลครบแล้ว</div>
     </div>
   </div>
 </template>
 <script>
-import BooksService from "@/services/BooksService";
+import EquipmentsService from "@/services/EquipmentsService";
 import _ from "lodash";
 import ScrollMonitor from "scrollMonitor";
 
@@ -113,7 +113,7 @@ export default {
   watch: {
     search: _.debounce(async function (value) {
       const route = {
-        name: "books",
+        name: "equipments",
       };
 
       if (this.search !== "") {
@@ -129,20 +129,20 @@ export default {
     "$route.query.search": {
       immediate: true,
       async handler(value) {
-        this.books = [];
+        this.equipments = [];
         this.results = [];
         this.loading = true;
-        this.results = (await BooksService.index(value)).data;
+        this.results = (await EquipmentsService.index(value)).data;
         this.appendResults();
 
-        this.results.forEach((book) => {
+        this.results.forEach((equipment) => {
           if (this.category.length > 0) {
             // console.log(this.category.indexOf(book.category))
-            if (this.category.indexOf(book.category) === -1) {
-              this.category.push(book.category);
+            if (this.category.indexOf(equipment.category) === -1) {
+              this.category.push(equipment.category);
             }
           } else {
-            this.category.push(book.category);
+            this.category.push(equipment.category);
           }
         });
         this.loading = false;
@@ -153,7 +153,7 @@ export default {
   },
   data() {
     return {
-      books: [],
+      equipments: [],
       BASE_URL: "http://localhost:8081/assets/uploads/",
       search: "",
       results: [],
@@ -162,7 +162,7 @@ export default {
     };
   },
   async created() {
-    this.books = (await BooksService.index()).data;
+    this.equipments = (await EquipmentsService.index()).data;
   },
   methods: {
     wait(ms) {
@@ -171,27 +171,27 @@ export default {
       };
     },
     appendResults: function () {
-      if (this.books.length < this.results.length) {
+      if (this.equipments.length < this.results.length) {
         let toAppend = this.results.slice(
-          this.books.length,
-          LOAD_NUM + this.books.length // จำกัดการแสดงผล
+          this.equipments.length,
+          LOAD_NUM + this.equipments.length // จำกัดการแสดงผล
         );
-        this.books = this.books.concat(toAppend);
+        this.equipments = this.equipments.concat(toAppend);
       }
     },
     navigateTo(route) {
       this.$router.push(route);
     },
-    async deleteBook(book) {
+    async deleteEquipment(equipment) {
       try {
-        await BooksService.delete(book);
+        await EquipmentsService.delete(equipment);
         this.refreshData();
       } catch (err) {
         console.log(err);
       }
     },
     async refreshData() {
-      this.books = (await BooksService.index()).data;
+      this.equipments = (await EquipmentsService.index()).data;
     },
     setCategory(keyword) {
       if (keyword === " ") {
@@ -212,25 +212,25 @@ export default {
         pageWatcher = null;
       }
     },
-    async suspend(bookId) {
+    async suspend(equipmentId) {
       let user = {
-        id: bookId,
+        id: equipmentId,
         status: " Suspend",
       };
       try {
-        await BooksService.put(user);
+        await EquipmentsService.put(user);
         this.refreshData();
       } catch (error) {
         console.log(error);
       }
     },
-    async publish(bookId) {
+    async publish(equipmentId) {
       let user = {
-        id: bookId,
+        id: equipmentId,
         status: "published",
       };
       try {
-        await BooksService.put(user);
+        await EquipmentsService.put(user);
         this.refreshData();
       } catch (error) {
         console.log(error);
@@ -267,11 +267,12 @@ export default {
   clear: both;
 }
 .book-list {
-  border: solid 1px #dfdfdf;
+  border-radius: 8px;
   margin-bottom: 10px;
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
+  background: skyblue;
   padding: 5px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
@@ -303,6 +304,7 @@ export default {
 .categories li a {
   padding: 5px 10px 5px 10px;
   background: paleturquoise;
+  border-radius: 8px;
   color: black;
   text-decoration: none;
 }
@@ -310,17 +312,21 @@ export default {
   margin-top: 10px;
 }
 .categories li.clear a {
-  background: tomato;
+  background: black;
+  border-radius: 8px;
   color: white;
 }
 .book-load-finished {
   padding: 4px;
   text-align: center;
-  background: seagreen;
+  background: darkslategrey;
   color: white;
 }
 .emptybook {
   background-color: coral;
   border-color: coral;
+}
+div {
+    font-family: 'Kanit', sans-serif;
 }
 </style>

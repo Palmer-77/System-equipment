@@ -71,7 +71,7 @@
                   class="btn btn-sm btn-info"
                   v-on:click="navigateTo('/front/read/'+ blog.id)"
                 >
-                  <i class="fab fa-readme"></i> View Blog
+                  <i class="fab fa-readme"></i> ดูโพสต์
                 </button>
               </p>
             </div>
@@ -325,5 +325,8 @@ export default {
   color: white;
   margin-left: auto;
   margin-right: auto;
+}
+div {
+    font-family: 'Kanit', sans-serif;
 }
 </style>

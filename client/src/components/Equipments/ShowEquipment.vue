@@ -2,26 +2,29 @@
   <div class="component-wrapper container">
     <main-header navsel="back"></main-header>
     <br><br>
-    <div v-if="book">
-      <div class="book-wrapper" v-if="book != null">
-        <h1>{{ book.title }}</h1>
+    <div v-if="equipment">
+      <div class="book-wrapper" v-if="equipment != null">
+        <center><div v-if="equipment.thumbnail != 'null'">
+                <img class="img-responsive" :src="BASE_URL+equipment.thumbnail" alt="thumbnail" />
+              </div></center>
+        <h1>{{ equipment.title }}</h1>
         <p>
-          <strong>Category:</strong>
+          <strong>ประเภท:</strong>
           <a
             href="#"
-            v-on:click.prevent="navigateTo(`/books?search=${book.category}`)"
-          >{{book.category }}</a>
+            v-on:click.prevent="navigateTo(`/equipments?search=${equipment.category}`)"
+          >{{equipment.category }}</a>
         </p>
         <p>
-          <strong>status:</strong> {{book.status}}
+          <strong>สถานะ:</strong> {{equipment.status}}
         </p>
-        <div class="content" v-html="book.content"></div>
-        <!-- <p>category: {{ book.category }}</p>
-        <p>status: {{ book.status }}</p>-->
+        <div class="content" v-html="equipment.content"></div>
+        <!-- <p>category: {{ equipment.category }}</p>
+        <p>status: {{ equipment.status }}</p>-->
       </div>
       <div class="back-nav">
-        <button class="btn btn-success" v-on:click="navigateTo('/books')">
-          <i class="fas fa-arrow-left"></i> Back..
+        <button class="btn btn-success" v-on:click="navigateTo('/equipments')">
+          <i class="fas fa-arrow-left"></i> กลับ
         </button>
       </div>
       <br />
@@ -30,14 +33,15 @@
 </template>
 <script>
 import { mapState } from "vuex";
-import BooksService from "@/services/BooksService";
+import EquipmentsService from "@/services/EquipmentsService";
 import UsersService from "@/services/UsersService";
 import CommentComp from "@/components/Fronts/Comment";
 
 export default {
   data() {
     return {
-      book: null,
+      equipment: null,
+      BASE_URL: "http://localhost:8081/assets/uploads/",
       resultUpdated: "",
       users: null,
     };
@@ -46,11 +50,11 @@ export default {
     CommentComp,
   },
   async created() {
-    // get book
+    // get equipment
     // check permission first
     try {
-      let bookId = this.$route.params.bookId;
-      this.book = (await BooksService.show(bookId)).data;
+      let equipmentId = this.$route.params.equipmentId;
+      this.equipment = (await EquipmentsService.show(equipmentId)).data;
     } catch (error) {
       console.log(error);
     }
@@ -99,6 +103,8 @@ export default {
   max-width: 200px;
 }
 .book-wrapper {
+  background: skyblue;
+  border-radius: 8px;
   margin-top: 20px;
   padding: 40px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
@@ -121,5 +127,7 @@ export default {
   font-family: "kanit";
   font-size: 1.2em;
 }
-
+div {
+    font-family: 'Kanit', sans-serif;
+}
 </style>

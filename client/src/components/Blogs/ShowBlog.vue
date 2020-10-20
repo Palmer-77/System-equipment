@@ -4,17 +4,20 @@
         <br><br>
         <div v-if="blog" >
             <div class="blog-wrapper" v-if="blog != null">
+                <center><div v-if="blog.thumbnail != 'null'">
+                <img class="img-responsive" :src="BASE_URL+blog.thumbnail" alt="thumbnail" />
+              </div></center>
                 <h1>{{ blog.title }}</h1>
-                <p><strong>Category: </strong> 
+                <p><strong>ประเภท: </strong> 
                 <a href="#" v-on:click.prevent="navigateTo(`/blogs?search=${blog.category}`)">{{blog.category }}</a></p>
                 <p>
-          <strong>status:</strong> {{blog.status}}
+          <strong>สถานะ:</strong> {{blog.status}}
         </p>
                 <div class="content" v-html="blog.content"></div>
                 <!-- <p>category: {{ blog.category }}</p>
                 <p>status: {{ blog.status }}</p> -->
             </div>
-            <div class="back-nav"><button class="btn btn-success" v-on:click="navigateTo('/blogs')"><i class="fas fa-arrow-left"></i> Back..</button></div>
+            <div class="back-nav"><button class="btn btn-success" v-on:click="navigateTo('/blogs')"><i class="fas fa-arrow-left"></i> กลับ</button></div>
             <comment-comp v-bind:blogid="blog.id" v-bind:user="user"></comment-comp>
             <transition name="fade">
                 <div v-if="resultUpdated != ''" class="popup-msg">
@@ -35,6 +38,7 @@
         data () {
             return {
                 blog: null,
+                BASE_URL: "http://localhost:8081/assets/uploads/",
                 resultUpdated: '',
                 users:null,
             }
@@ -79,6 +83,8 @@
     }
     .blog-wrapper {
         margin-top:20px;
+        border-radius: 8px;
+        background: skyblue;
         padding: 40px;
         box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
     }
@@ -100,4 +106,7 @@
         font-family: 'kanit';
         font-size: 1.2em;
     }
+    div {
+    font-family: 'Kanit', sans-serif;
+}
 </style>

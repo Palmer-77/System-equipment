@@ -18,16 +18,16 @@ import Upload from '@/components/Utils/Upload'
 // Front
 import FrontIndex from '@/components/Fronts/Index'
 import FrontShow from '@/components/Fronts/ShowBlog'
-import FrontBooks from '@/components/Fronts/Books'
-import FrontshowBooks from '@/components/Fronts/showBook'
+import FrontEquipments from '@/components/Fronts/Equipments'
+import FrontshowEquipments from '@/components/Fronts/showEquipment'
 import FrontCartlist from '@/components/Fronts/Cartlist'
 
-// Books
-import BookIndex from '@/components/Books/Index'
-import BookCreate from '@/components/Books/CreateBook'
-import BookEdit from '@/components/Books/EditBook'
-import BookShow from '@/components/Books/ShowBook'
-import Cartlist from '@/components/Books/Cartlist'
+// Equipments
+import EquipmentIndex from '@/components/Equipments/Index'
+import EquipmentCreate from '@/components/Equipments/CreateEquipment'
+import EquipmentEdit from '@/components/Equipments/EditEquipment'
+import EquipmentShow from '@/components/Equipments/ShowEquipment'
+import Cartlist from '@/components/Equipments/Cartlist'
 Vue.use(Router)
 export default new Router({
   mode: 'history',
@@ -98,9 +98,9 @@ export default new Router({
       component: FrontIndex
     },
     {
-      path: '/front-books',
-      name: 'front-books',
-      component: FrontBooks
+      path: '/front-equipments',
+      name: 'front-equipments',
+      component: FrontEquipments
     },
     {
       path: '/front-cartlist',
@@ -108,35 +108,35 @@ export default new Router({
       component: FrontCartlist
     },
     {
-      path: '/front-view-book/:bookId',
-      name: 'front-view-book',
-      component: FrontshowBooks
+      path: '/front-view-equipment/:equipmentId',
+      name: 'front-view-equipment',
+      component: FrontshowEquipments
     },
     {
       path: '/front/read/:blogId',
       name: 'front-read',
       component: FrontShow
     },
-    // books
+    // Equipments
     {
-      path: '/books',
-      name: 'books',
-      component: BookIndex
+      path: '/equipments',
+      name: 'equipments',
+      component: EquipmentIndex
     },
     {
-      path: '/book/create',
-      name: 'books-edit',
-      component: BookCreate
+      path: '/equipment/create',
+      name: 'equipments-edit',
+      component: EquipmentCreate
     },
     {
-      path: '/book/edit/:bookId',
-      name: 'book-edit',
-      component: BookEdit
+      path: '/equipment/edit/:equipmentId',
+      name: 'equipment-edit',
+      component: EquipmentEdit
     },
     {
-      path: '/book/:bookId',
-      name: 'book',
-      component: BookShow
+      path: '/equipment/:equipmentId',
+      name: 'equipment',
+      component: EquipmentShow
     },
     {
       path: '/Cartlist',

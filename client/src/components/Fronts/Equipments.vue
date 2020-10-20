@@ -4,30 +4,30 @@
     <div class="hero-wrapper">
       <div class="component-wrapper">
         <div class="hero">
-          <img src="@/assets/scientist.png" height="100%" class="logo" style="float:left" />
+          <img src="@/assets/scientist.png" class="logo" style="float:left" />
           <h1>เลือกอุปกรณ์ที่จะใช้งานได้เลย</h1>
           <p>By Steve Black</p>
         </div>
         <div class="container new-book">
           <h2>อุปกรณ์ที่เพิ่มมาใหม่</h2>
           <div class="row">
-            <div class="col-md-3" v-for="book in newBooks" v-bind:key="book.id">
-              <div v-if="book.thumbnail != 'null'">
-                <img class="img-responsive" :src="BASE_URL+book.thumbnail" alt="thumbnail" />
+            <div class="col-md-3" v-for="equipment in newEquipments" v-bind:key="equipment.id">
+              <div v-if="equipment.thumbnail != 'null'">
+                <img class="img-responsive" :src="BASE_URL+equipment.thumbnail" alt="thumbnail" />
               </div>
-              <h4>{{ book.title }}</h4>
-              <div v-html="book.content.slice(0,60) + '...'"></div>
+              <h4>{{ equipment.title }}</h4>
+              <div v-html="equipment.content.slice(0,60) + '...'"></div>
               <p>
                 <strong>ราคาค่าปรับเมื่ออุปกรณ์เสียหาย:</strong>
-                {{ book.prices | getNumberWithCommas
+                {{ equipment.prices | getNumberWithCommas
                 }}
               </p>
               
               <div>
-                <button v-on:click.prevent="addCart(book)" class="btn btnsm btn-danger">
+                <button v-on:click.prevent="addCart(equipment)" class="btn btnsm btn-danger">
                   <i class="far fa-clipboard"></i> เลือก
                 </button>
-                <button class="btn btn-sm btn-info" v-on:click="navigateTo('/front-view-book/'+ book.id)">
+                <button class="btn btn-sm btn-info" v-on:click="navigateTo('/front-view-equipment/'+ equipment.id)">
                   <i class="fab fareadme"></i> อ่านเพิ่ม
                 </button>
                 
@@ -71,12 +71,12 @@
           <div class="clearfix"></div>
         </div>
         <transition-group name="fade">
-          <div v-for="book in books" v-bind:key="book.id" class="book-list">
+          <div v-for="equipment in equipments" v-bind:key="equipment.id" class="book-list">
              <div class="popup-cart" v-if="carts.length">
             <h3>อุปกรณ์ที่ใช้งาน</h3>
             <ul class="cart">
               <li v-for="cart in carts" v-bind:key="cart.id">
-                <div>{{ cart.booktitle }} จํานวน {{ cart.qty}} x {{ cart.prices }}</div>
+                <div>{{ cart.equipmenttitle }} จํานวน {{ cart.qty}} x {{ cart.prices }}</div>
                 <div>
                   <button v-on:click.prevent="inc(cart)">+</button>
                   <button v-on:click.prevent="dec(cart)">-</button>
@@ -92,36 +92,36 @@
             <!-- <p>id: {{ book.id }}</p> -->
             <div class="book-pic">
               <!-- <transition name="fade"> -->
-              <div class="thumbnail-pic" v-if="book.thumbnail != 'null'">
-                <img :src="BASE_URL+book.thumbnail" alt="thumbnail" />
+              <div class="thumbnail-pic" v-if="equipment.thumbnail != 'null'">
+                <img :src="BASE_URL+equipment.thumbnail" alt="thumbnail" />
               </div>
               <!-- </transition> -->
             </div>
-            <h3>{{ book.title }}</h3>
-            <div v-html="book.content.slice(0,200) + '...'"></div>
+            <h3>{{ equipment.title }}</h3>
+            <div v-html="equipment.content.slice(0,200) + '...'"></div>
             <div class="book-info">
               <p>
                 <strong>ประเภท:</strong>
-                {{ book.category }}
+                {{ equipment.category }}
               </p>
               <p>
                 <strong>นำเข้าเมื่อ:</strong>
-                {{ book.createdAt }}
+                {{ equipment.createdAt }}
               </p>
-              <!-- <p>status: {{ book.status }}</p> -->
+              <!-- <p>status: {{ equipment.status }}</p> -->
               <p>
                 <strong>ราคาค่าปรับเมื่ออุปกรณ์เสียหาย:</strong>
-                {{ book.prices | getNumberWithCommas
+                {{ equipment.prices | getNumberWithCommas
                 }}
                 
               </p>
               <p>
-                <button v-on:click.prevent="addCart(book)" class="btn btnsm btn-danger">
+                <button v-on:click.prevent="addCart(equipment)" class="btn btnsm btn-danger">
                   <i class="far fa-clipboard"></i> เลือก
                 </button>
                 <button
                   class="btn btn-sm btn-info"
-                  v-on:click="navigateTo('/front-view-book/'+ book.id)">
+                  v-on:click="navigateTo('/front-view-equipment/'+ equipment.id)">
                   <i class="fab fareadme"></i> อ่านเพิ่ม
                 </button>
               </p>
@@ -130,16 +130,16 @@
           </div>
           
         </transition-group>
-        <div v-if="books.length === 0 && loading === false" class="empty-book">*** ไม่มีข้อมูล***</div>
+        <div v-if="equipments.length === 0 && loading === false" class="empty-book">*** ไม่มีข้อมูล***</div>
         <div id="book-list-bottom">
-          <div class="book-load-finished" v-if="books.length === results.length && results.length > 0">โหลดข้อมูลครบแล้ว</div>
+          <div class="book-load-finished" v-if="equipments.length === results.length && results.length > 0">โหลดข้อมูลครบแล้ว</div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import BooksService from "@/services/BooksService";
+import EquipmentsService from "@/services/EquipmentsService";
 import BuysService from "@/services/BuysService";
 import _ from "lodash";
 import ScrollMonitor from "scrollMonitor";
@@ -152,7 +152,7 @@ export default {
   watch: {
     search: _.debounce(async function (value) {
       const route = {
-        name: "front-books",
+        name: "front-equipments",
       };
       if (this.search !== "") {
         route.query = {
@@ -165,19 +165,19 @@ export default {
     "$route.query.search": {
       immediate: true,
       async handler(value) {
-        this.books = [];
+        this.equipments = [];
         this.results = [];
         this.loading = true;
-        this.results = (await BooksService.frontIndex(value)).data;
+        this.results = (await EquipmentsService.frontIndex(value)).data;
         this.appendResults();
-        this.results.forEach((book) => {
+        this.results.forEach((equipment) => {
           if (this.category.length > 0) {
             // console.log(this.category.indexOf(book.category))
-            if (this.category.indexOf(book.category) === -1) {
+            if (this.category.indexOf(equipment.category) === -1) {
               this.category.push(book.category);
             }
           } else {
-            this.category.push(book.category);
+            this.category.push(equipment.category);
           }
         });
         this.loading = false;
@@ -188,23 +188,23 @@ export default {
   },
   data() {
     return {
-      books: [],
+      equipments: [],
       BASE_URL: "http://localhost:8081/assets/uploads/",
       search: "",
       results: [],
       category: [],
       loading: false,
-      newBooks: [],
+      newEquipments: [],
       carts: [],
       total: 0
     };
   },
   // async created () {
-  // this.books = (await BooksService.index()).data
+  // this.equipments = (await BooksService.index()).data
   // },
   async created() {
-    let allBooks = (await BooksService.frontIndex()).data;
-    this.newBooks = allBooks.slice(0, 4);
+    let allEquipments = (await EquipmentsService.frontIndex()).data;
+    this.newEquipments = allEquipments.slice(0, 4);
   },
   methods: {
     sendBuy() {
@@ -234,12 +234,12 @@ export default {
       }
     },
     appendResults: function () {
-      if (this.books.length < this.results.length) {
+      if (this.equipments.length < this.results.length) {
         let toAppend = this.results.slice(
-          this.books.length,
-          LOAD_NUM + this.books.length
+          this.equipments.length,
+          LOAD_NUM + this.equipments.length
         );
-        this.books = this.books.concat(toAppend);
+        this.equipments = this.equipments.concat(toAppend);
       }
     },
     navigateTo(route) {
@@ -249,16 +249,16 @@ export default {
         this.$router.push(route);
       }
     },
-    async deleteBook(book) {
+    async deleteEquipment(equipment) {
       try {
-        await BooksService.delete(book);
+        await EquipmentsService.delete(equipment);
         this.refreshData();
       } catch (err) {
         console.log(err);
       }
     },
     async refreshData() {
-      this.books = (await BooksService.index()).data;
+      this.equipments = (await EquipmentsService.index()).data;
     },
     setCategory(keyword) {
       if (keyword === " ") {
@@ -268,15 +268,15 @@ export default {
         this.search = keyword;
       }
     },
-    addCart(book) {
+    addCart(equipment) {
       if (this.user == null) {
         alert("Please, Register or Login before.\n\nThank you.");
       } else {
-        this.total += parseInt(book.prices);
+        this.total += parseInt(equipment.prices);
 
         let found = false;
         this.carts.map((cart) => {
-          if (cart.bookid == book.id) {
+          if (cart.equipmentid == equipment.id) {
             cart.qty++;
             found = true;
           }
@@ -284,16 +284,16 @@ export default {
 
         if (!found) {
           let cart = {
-            bookid: book.id,
+            bookid: equipment.id,
             userid: this.user.id,
             email: this.user.email ,
             qty: 1,
             clientStatus: "กำลังใช้งาน",
             shopStatus: "รอการตรวจสอบ",
-            booktitle: book.title,
+            booktitle: equipment.title,
             username: this.user.name,
             userlastname: this.user.lastname,
-            prices: book.prices,
+            prices: equipment.prices,
           };
           this.carts.push(cart);
         }
@@ -473,5 +473,8 @@ export default {
   color: white;
   margin-left: auto;
   margin-right: auto;
+}
+div {
+    font-family: 'Kanit', sans-serif;
 }
 </style>

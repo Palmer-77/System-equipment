@@ -1,14 +1,14 @@
-const {Book} = require('../models')
+const {Equipment} = require('../models')
 
 module.exports = {
-    // indx with serach Book
+    // indx with serach Equipment
     async index (req, res) {
         try {
-            let books = null
+            let equipments = null
             const search = req.query.search
             // console.log('search key: ' + search)
             if (search) {
-                books = await Book.findAll({
+                equipments = await Equipment.findAll({
                     where: {
                         $or: [
                             'title', 'content', 'category'
@@ -21,83 +21,83 @@ module.exports = {
                     order: [['createdAt', 'DESC']]
                 })
             } else {
-                books = await Book.findAll({
+                equipments = await Equipment.findAll({
                     order: [['createdAt', 'DESC']]
                 })
             }
-                res.send(books)
+                res.send(equipments)
             } catch (err) {
             res.status(500).send({
-                error: 'an error has occured trying to fetch the books'
+                error: 'an error has occured trying to fetch the equipments'
             })
         }
     },
-    // create Book
+    // create Equipment
     async create (req, res) {
         // res.send(JSON.stringify(req.body))
         try {
-            const book = await Book.create(req.body)
-            res.send(book.toJSON())
+            const equipment = await Equipment.create(req.body)
+            res.send(equipment.toJSON())
         } catch (err) {
             res.status(500).send({
-                error: 'Create Book incorrect'
+                error: 'Create Equipment incorrect'
             })
         }
     },
-    // edit Book, suspend, active
+    // edit Equipment, suspend, active
     async put (req, res) {
         try {
-            await Book.update(req.body, {
+            await Equipment.update(req.body, {
                 where: {
-                    id: req.params.bookId
+                    id: req.params.equipmentId
                 }
             })
         res.send(req.body)
         } catch (err) {
             req.status(500).send({
-                error: 'Update Book incorrect'
+                error: 'Update Equipment incorrect'
             })
         }
     },
-        // delete Book
+        // delete Equipment
     async remove (req, res) {
         try {
-            const book = await Book.findOne({
+            const equipment = await Equipment.findOne({
                 where: {
-                id: req.params.bookId
+                id: req.params.equipmentId
                 }
             })
-            if(!book){
+            if(!equipment){
                 return res.status(403).send({
-                    error: 'The Book information was incorrect'
+                    error: 'The Equipment information was incorrect'
                 })
             }
-            await book.destroy()
-            res.send(book)
+            await equipment.destroy()
+            res.send(equipment)
         } catch (err) {
             req.status(500).send({
-                error: 'The Book information was incorrect'
+                error: 'The Equipment information was incorrect'
             })
         }
     },
-        // get Book by id
+        // get Equipment by id
     async show (req, res) {
         try {
-            const book = await Book.findById(req.params.bookId)
-            res.send(book)
+            const equipment = await Equipment.findById(req.params.equipmentId)
+            res.send(equipment)
         } catch (err) {
             req.status(500).send({
-                error: 'The Book information was incorrect'
+                error: 'The Equipment information was incorrect'
             })
         }
     },
     async frontIndex (req, res) {
         try {
-            let books = null
+            let equipments = null
             const search = req.query.search
             console.log('----------> search key: ' + search)
             if (search) {
-                books = await Book.findAll({
+                equipments = await Equipment.findAll({
                     where: {
                         $or: [
                             'title', 'content', 'category'
@@ -118,17 +118,17 @@ module.exports = {
                     order: [['createdAt', 'DESC']]
                 })
             } else {
-                books = await Book.findAll({
+                equipments = await Equipment.findAll({
                 where: {
                     'status': 'published'
                 },
                     order: [['createdAt', 'DESC']]
                 })
             }
-            res.send(books)
+            res.send(equipments)
         }catch (err) {
             res.status(500).send({
-                error: 'an error has occured trying to fetch the books'
+                error: 'an error has occured trying to fetch the equipments'
             })
         }
     },

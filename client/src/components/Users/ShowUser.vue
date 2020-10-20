@@ -2,7 +2,7 @@
     <div>
         <main-header navsel="back"></main-header>
         <br><br><br>
-        <center><h1>Show User</h1>
+        <center><h1>รายระเอียดผู้ใช้</h1>
         <table border="0">
             <tr>
                 <th class="d">
@@ -42,7 +42,7 @@
             <br>
             <tr>
                 <th class="d">
-                    <center><b>status:</b></center>
+                    <center><b>สถานะ:</b></center>
                 </th>
                 <th class ="c">
                     <div class="form-control center_div" readonly> {{ user.status }}</div>
@@ -51,7 +51,7 @@
             <br>
             <tr>
                 <th class="d">
-                    <center><b>type:</b></center>
+                    <center><b>แบบ:</b></center>
                 </th>
                 <th class ="c">
                     <div class="form-control center_div" readonly> {{ user.type }}</div>
@@ -61,7 +61,7 @@
         </center>
         <br>
         
-        <center><button class="btn btn-success btn-sm" v-on:click="navigateTo('/users')">Back..</button></center>
+        <center><button class="btn btn-success btn-sm" v-on:click="navigateTo('/users')">กลับ</button></center>
     </div>
 </template>
 <script>
@@ -104,4 +104,7 @@ export default {
     .d{
         width: 100px ;
     }
+    div {
+    font-family: 'Kanit', sans-serif;
+}
 </style>

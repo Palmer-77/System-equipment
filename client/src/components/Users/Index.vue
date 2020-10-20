@@ -5,7 +5,7 @@
       <br />
       <br />
       <br />
-      <h2>ส่วนจัดการ Users</h2>
+      <h2>ส่วนจัดการ ผู้ใช้</h2>
       <div>
         <form class="form-inline form-search">
           <div class="form-group">
@@ -182,11 +182,13 @@ export default {
 }
 .blog-list {
   border: solid 1px #dfdfdf;
+  border-radius: 8px;
   margin-bottom: 10px;
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
   padding: 5px;
+  background: skyblue;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
 .blog-header {
@@ -231,7 +233,10 @@ export default {
 .blog-load-finished {
   padding: 4px;
   text-align: center;
-  background: seagreen;
+  background: darkslategrey;
   color: white;
+}
+div {
+    font-family: 'Kanit', sans-serif;
 }
 </style>

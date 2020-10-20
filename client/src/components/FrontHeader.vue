@@ -4,8 +4,8 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand navbar-link" href="#" von:click.prevent="navigateTo('/dashboard')">
-            <img src="@/assets/scientist.png" id="logo" />
+          <a class="navbar-brand navbar-link" router-link :to="{name: 'front'}" von:click.prevent="navigateTo('/dashboard')">
+            <img src="@/assets/scientist2.png" id="logo" />
           </a>
           <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1">
             <span class="sr-only">Toggle navigation</span>
@@ -22,7 +22,7 @@
               </router-link>
             </li>
             <li role="presentation">
-              <router-link :to="{name: 'front-books'}">
+              <router-link :to="{name: 'front-equipments'}">
                 <i class="far fa-clipboard"></i> อุปกรณ์
               </router-link>
             </li>
@@ -48,8 +48,8 @@
     <div class="modal" v-if="showRegister">
       <transition name="fade">
        <div class="login-wrapperr">
-          <h3>Client Register</h3>
-          <form v-on:submit.prevent="clientRegister" class="form-horizontal">
+          <h3>สมัครสมาชิก</h3>
+          <form v-on:submit.prevent="clientRegister" class="formhorizontal">
             <div class="form-group">
               <label class="control-label col-md-3">Email:</label>
               <div class="col-md-9">
@@ -87,10 +87,10 @@
             <div class="form-group">
               <div class="col-md-offset-3 col-md-9">
                 <button class="btn btn-success btn-sm" type="submit">
-                  <i class="fas fa-key"></i> Register
+                  <i class="fas fa-key"></i> สมัครสมาชิก
                 </button>
                 <button v-on:click.prevent="showRegister = false" class="btn btn-danger btn-sm" type="button">
-                  <i class="fas fa-timescircle"></i> Close
+                  <i class="fas fa-timescircle"></i> ยกเลิก
                 </button>
               </div>
             </div>
@@ -109,7 +109,7 @@
     <div class="modal" v-if="showLogin ">
       <transition name="fade">
         <div class="login-wrapper">
-          <h3>Client Login</h3>
+          <h3>เข้าสู่ระบบ</h3>
           <form v-on:submit.prevent="clientLogin" class="formhorizontal">
             <div class="form-group">
               <label class="control-label col-md-3">Email:</label>
@@ -134,14 +134,14 @@
             <div class="form-group">
               <div class="col-md-offset-3 col-md-9">
                 <button class="btn btn-success btn-sm" type="submit">
-                  <i class="fas fa-key"></i> Login
+                  <i class="fas fa-key"></i> เข้าสู่ระบบ
                 </button>
                 <button
                   v-on:click.prevent="showLogin = false"
                   class="btn btn-danger btn-sm"
                   type="button"
                 >
-                  <i class="fas fa-timescircle"></i> Close
+                  <i class="fas fa-timescircle"></i> ยกเลิก
                 </button>
               </div>
             </div>
@@ -250,6 +250,9 @@ export default {
 };
 </script>
 <style scoped>
+div {
+    font-family: 'Kanit', sans-serif;
+}
 .error {
   color: red;
   text-align: center;
@@ -268,7 +271,7 @@ export default {
   margin-right: 5px;
 }
 .navbar-brand > img {
-  width: 36px;
+  width: 200px;
   padding: 12px 0;
   margin-top: -20px;
 }
@@ -292,21 +295,21 @@ export default {
 }
 .login-wrapper {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-  border: solid 1px #ddd;
+  border-radius: 8px;
   width: 360px;
   height: 230px ;
   padding: 10px 30px 20px 30px;
-  background-color: #fefefe;
+  background-color: skyblue;
   margin: 15% auto; /* 15% from the top and centered */
   /* padding: 20px; */
 }
 .login-wrapperr {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-  border: solid 1px #ddd;
+  border-radius: 8px;
   width: 360px;
   height: 260px ;
   padding: 10px 30px 20px 30px;
-  background-color: #fefefe;
+  background-color: skyblue;
   margin: 15% auto; /* 15% from the top and centered */
   /* padding: 20px; */
 }

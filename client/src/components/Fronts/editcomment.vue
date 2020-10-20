@@ -11,14 +11,14 @@
  <form v-on:submit.prevent="updateComment">
  <p><textarea rows="5" class="form-control" v-model="comment.comment"></textarea></p>
  <p>
- <button type="submit" class="btn btn-warning btn-xs"><i class="fas fa-save"></i> Update</button>
- <button type="button" v-on:click.prevent="editComment(false,comment.id, compUser.id, user.id)" class="btn btn-success btn-xs"><i class="fas fa-times-circle"></i> Close</button>
+ <button type="submit" class="btn btn-warning btn-xs"><i class="fas fa-save"></i> แก้ไข</button>
+ <button type="button" v-on:click.prevent="editComment(false,comment.id, compUser.id, user.id)" class="btn btn-success btn-xs"><i class="fas fa-times-circle"></i> ยกเลิก</button>
  </p>
  </form>
  </div>
  </transition>
  <p v-if="!editable && user != null && compUser.id === user.id"><button v-on:click="deleteComment(comment)" class="btn btn-xs-btn-danger"><i class="fas fa-trash-alt"></i> Delete</button></p>
- <p v-else-if="user.type === 'admin'"><button v-on:click="deleteComment(comment)" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i> Delete</button></p>
+ <p v-else-if="user.type === 'admin'"><button v-on:click="deleteComment(comment)" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i> ลบ</button></p>
 
  </div>
 </template>
@@ -115,4 +115,7 @@
     h4{
         padding: 4px;
     }
+    div {
+    font-family: 'Kanit', sans-serif;
+}
 </style>
