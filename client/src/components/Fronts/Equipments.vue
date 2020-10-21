@@ -174,7 +174,7 @@ export default {
           if (this.category.length > 0) {
             // console.log(this.category.indexOf(book.category))
             if (this.category.indexOf(equipment.category) === -1) {
-              this.category.push(book.category);
+              this.category.push(equipment.category);
             }
           } else {
             this.category.push(equipment.category);

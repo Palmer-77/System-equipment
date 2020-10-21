@@ -25,8 +25,8 @@
       </div>
 
       <div class="create-blog">
-        <button class="btn btn-success btn-sm" v-on:click="navigateTo('/blog/create')">สร้างโพส</button>
-        <strong>จํานวน โพส:</strong>
+        <button class="btn btn-success btn-sm" v-on:click="navigateTo('/blog/create')">สร้างโพสต์</button>
+        <strong>จํานวน โพสต์:</strong>
         {{results.length}}
       </div>
 
@@ -54,15 +54,15 @@
         <div v-html="blog.content.slice(0,200) + '...'"></div>
         <div class="blog-info">
           <p>
-            <strong>Category:</strong>
+            <strong>ประเภท:</strong>
             {{ blog.category }}
           </p>
           <p>
-            <strong>Create:</strong>
+            <strong>โพสต์เมื่อ:</strong>
             {{ blog.createdAt }}
           </p>
           <p>
-            <strong>status:</strong>
+            <strong>สถานะ:</strong>
             {{ blog.status }}
           </p>
           <!-- <p>status: {{ blog.status }}</p> -->
@@ -253,12 +253,13 @@ export default {
   clear: both;
 }
 .blog-list {
-  border: solid 1px #dfdfdf;
+  border-radius: 8px;
   margin-bottom: 10px;
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
   padding: 5px;
+  background: skyblue;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
 .blog-header {
